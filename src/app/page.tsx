@@ -3,6 +3,8 @@ import Link from "next/link";
 import React from "react";
 import bannerImg from "../assets/banner.png";
 
+export const dynamic = 'force-dynamic';
+
 type Workout = {
   id: number;
   name: string;
