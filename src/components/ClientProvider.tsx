@@ -7,14 +7,20 @@ export default function ClientProvider({ children }: { children: React.ReactNode
   return (
     <WorkoutProvider>
       <Toaster 
-        position="bottom-right" 
+        position="top-right" 
         toastOptions={{ 
           style: { 
             background: '#ffffff', 
             color: '#000000', 
             fontWeight: 'bold',
             borderRadius: '10px'
-          } 
+          },
+          success: {
+            style: { background: '#ffffff', color: '#000000' }
+          },
+          error: {
+            style: { background: '#ffffff', color: '#000000' }
+          }
         }} 
       />
       {children}

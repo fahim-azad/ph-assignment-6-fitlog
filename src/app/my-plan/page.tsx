@@ -15,7 +15,15 @@ export default function MyPlanPage() {
     setIsClient(true);
   }, []);
 
-  if (!isClient) return null;
+  if (!isClient) {
+    return (
+      <main className="flex-1 w-full px-6 sm:px-10 py-32 flex items-center justify-center min-h-[70vh]">
+        <p className="text-[#ccff00] font-bold text-2xl uppercase tracking-widest animate-pulse" style={{ fontFamily: "var(--font-oswald)" }}>
+          Loading workouts...
+        </p>
+      </main>
+    );
+  }
 
   const activeWorkouts = activeTab === 'plan' ? plannedWorkouts : savedWorkouts;
 
@@ -32,7 +40,16 @@ export default function MyPlanPage() {
 
   const handleMarkAsDone = (id: number) => {
     removePlanned(id);
-    toast.success('Workout marked as done!', { icon: '✅' });
+    toast.success('Workout marked as done!', { icon: '✅', style: { background: '#ffffff', color: '#000000', fontWeight: 'bold' } });
+  };
+
+  const handleRemove = (id: number) => {
+    if (activeTab === 'plan') {
+      removePlanned(id);
+    } else {
+      removeSaved(id);
+    }
+    toast.success('Workout removed', { icon: '🗑️', style: { background: '#ffffff', color: '#000000', fontWeight: 'bold' } });
   };
 
   return (
@@ -153,7 +170,7 @@ export default function MyPlanPage() {
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Mark as Done
                   </button>
                 )}
-                <button onClick={() => activeTab === 'plan' ? removePlanned(workout.id) : removeSaved(workout.id)} className="btn btn-sm btn-circle btn-ghost text-neutral-500 hover:text-white hover:bg-white/5">
+                <button onClick={() => handleRemove(workout.id)} className="btn btn-sm btn-circle btn-ghost text-neutral-500 hover:text-white hover:bg-white/5">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
               </div>
