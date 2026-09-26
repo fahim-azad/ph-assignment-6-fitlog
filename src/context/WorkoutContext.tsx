@@ -20,8 +20,8 @@ export type Workout = {
 type WorkoutContextType = {
   plannedWorkouts: Workout[];
   savedWorkouts: Workout[];
-  addPlanned: (workout: Workout) => void;
-  addSaved: (workout: Workout) => void;
+  addPlanned: (workout: Workout) => boolean;
+  addSaved: (workout: Workout) => boolean;
   removePlanned: (id: number) => void;
   removeSaved: (id: number) => void;
 };
@@ -46,7 +46,9 @@ export function WorkoutProvider({ children }: { children: React.ReactNode }) {
       const newPlanned = [...plannedWorkouts, workout];
       setPlannedWorkouts(newPlanned);
       localStorage.setItem('plannedWorkouts', JSON.stringify(newPlanned));
+      return true;
     }
+    return false;
   };
 
   const addSaved = (workout: Workout) => {
@@ -54,7 +56,9 @@ export function WorkoutProvider({ children }: { children: React.ReactNode }) {
       const newSaved = [...savedWorkouts, workout];
       setSavedWorkouts(newSaved);
       localStorage.setItem('savedWorkouts', JSON.stringify(newSaved));
+      return true;
     }
+    return false;
   };
 
   const removePlanned = (id: number) => {

@@ -7,22 +7,25 @@ export default function WorkoutButtons({ workout }: { workout: Workout }) {
   const { addPlanned, addSaved } = useWorkouts();
 
   const handleAddPlanned = () => {
-    addPlanned(workout);
-    toast.success("Added to today's plan", {
-      icon: '✅',
-      style: {
-        background: '#ccff00',
-        color: '#000',
-        fontWeight: 'bold',
-      },
-    });
+    const success = addPlanned(workout);
+    if (success) {
+      toast.success("Added to today's plan", {
+        icon: '✅',
+      });
+    } else {
+      toast.error("Cannot add twice");
+    }
   };
 
   const handleAddSaved = () => {
-    addSaved(workout);
-    toast.success("Saved for later", {
-      icon: '🔖',
-    });
+    const success = addSaved(workout);
+    if (success) {
+      toast.success("Saved for later", {
+        icon: '🔖',
+      });
+    } else {
+      toast.error("Cannot save twice");
+    }
   };
 
   return (

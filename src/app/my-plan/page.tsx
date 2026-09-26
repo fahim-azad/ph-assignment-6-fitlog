@@ -20,8 +20,8 @@ export default function MyPlanPage() {
   const activeWorkouts = activeTab === 'plan' ? plannedWorkouts : savedWorkouts;
 
   const sortedWorkouts = [...activeWorkouts].sort((a, b) => {
-    if (sortBy === 'duration') return b.duration - a.duration;
-    if (sortBy === 'calories') return b.caloriesBurned - a.caloriesBurned;
+    if (sortBy === 'duration') return a.duration - b.duration;
+    if (sortBy === 'calories') return a.caloriesBurned - b.caloriesBurned;
     if (sortBy === 'rating') return b.rating - a.rating;
     return 0;
   });
@@ -32,7 +32,7 @@ export default function MyPlanPage() {
 
   const handleMarkAsDone = (id: number) => {
     removePlanned(id);
-    toast.success('Workout marked as done!', { icon: '✅', style: { background: '#ccff00', color: '#000', fontWeight: 'bold' }});
+    toast.success('Workout marked as done!', { icon: '✅' });
   };
 
   return (

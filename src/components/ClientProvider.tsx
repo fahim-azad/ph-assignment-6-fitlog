@@ -10,9 +10,10 @@ export default function ClientProvider({ children }: { children: React.ReactNode
         position="bottom-right" 
         toastOptions={{ 
           style: { 
-            background: '#17181c', 
-            color: '#fff', 
-            border: '1px solid rgba(255,255,255,0.1)' 
+            background: '#ffffff', 
+            color: '#000000', 
+            fontWeight: 'bold',
+            borderRadius: '10px'
           } 
         }} 
       />
