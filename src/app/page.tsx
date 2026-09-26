@@ -41,11 +41,10 @@ export default async function Page() {
             className="text-5xl md:text-6xl lg:text-[4.5rem] xl:text-7xl font-bold uppercase text-white leading-[1.05] mb-6 tracking-tight"
             style={{ fontFamily: "var(--font-oswald)" }}
           >
-            <span className="whitespace-nowrap">TRAIN WITH INTENT. LOG</span> <br className="hidden md:block" /> EVERY SET.
+            TRAIN WITH INTENT. LOG EVERY SET.
           </h1>
           <p className="text-neutral-400 text-lg leading-relaxed mb-8 max-w-[600px]">
-            <span className="hidden md:inline whitespace-nowrap">FitLog is a dark, no-nonsense gym companion: pick a lift, lock it</span>
-            <span className="md:hidden">FitLog is a dark, no-nonsense gym companion: pick a lift, lock it</span> <br className="hidden md:block" /> into today's plan, and watch the week's work add up.
+            FitLog is a dark, no-nonsense gym companion: pick a lift, lock it into today's plan, and watch the week's work add up.
           </p>
           <Link
             href="#library"
