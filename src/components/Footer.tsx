@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 py-8 px-6 sm:px-10 mt-auto w-full flex items-center justify-between">
+    <footer className="border-t border-white/5 py-8 px-6 sm:px-10 mt-auto w-full flex flex-col sm:flex-row items-center justify-between gap-4">
       <div className="flex items-center gap-2">
         <Image 
           src={logo} 
