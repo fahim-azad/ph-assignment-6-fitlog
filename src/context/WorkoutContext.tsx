@@ -22,6 +22,8 @@ type WorkoutContextType = {
   savedWorkouts: Workout[];
   addPlanned: (workout: Workout) => void;
   addSaved: (workout: Workout) => void;
+  removePlanned: (id: number) => void;
+  removeSaved: (id: number) => void;
 };
 
 const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
@@ -55,16 +57,28 @@ export function WorkoutProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const removePlanned = (id: number) => {
+    const newPlanned = plannedWorkouts.filter(w => w.id !== id);
+    setPlannedWorkouts(newPlanned);
+    localStorage.setItem('plannedWorkouts', JSON.stringify(newPlanned));
+  };
+
+  const removeSaved = (id: number) => {
+    const newSaved = savedWorkouts.filter(w => w.id !== id);
+    setSavedWorkouts(newSaved);
+    localStorage.setItem('savedWorkouts', JSON.stringify(newSaved));
+  };
+
   if (!isClient) {
     return (
-      <WorkoutContext.Provider value={{ plannedWorkouts: [], savedWorkouts: [], addPlanned, addSaved }}>
+      <WorkoutContext.Provider value={{ plannedWorkouts: [], savedWorkouts: [], addPlanned, addSaved, removePlanned, removeSaved }}>
         {children}
       </WorkoutContext.Provider>
     );
   }
 
   return (
-    <WorkoutContext.Provider value={{ plannedWorkouts, savedWorkouts, addPlanned, addSaved }}>
+    <WorkoutContext.Provider value={{ plannedWorkouts, savedWorkouts, addPlanned, addSaved, removePlanned, removeSaved }}>
       {children}
     </WorkoutContext.Provider>
   );
