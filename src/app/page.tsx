@@ -3,8 +3,6 @@ import Link from "next/link";
 import React from "react";
 import bannerImg from "../assets/banner.png";
 
-export const dynamic = 'force-dynamic';
-
 type Workout = {
   id: number;
   name: string;
@@ -18,7 +16,7 @@ type Workout = {
 
 async function getWorkouts(): Promise<Workout[]> {
   try {
-    const res = await fetch("https://api.abcz.workers.dev/api/fitlog", { cache: "no-store" });
+    const res = await fetch("https://api.abcz.workers.dev/api/fitlog");
     if (!res.ok) return [];
     return res.json();
   } catch (error) {

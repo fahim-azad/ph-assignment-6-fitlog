@@ -4,10 +4,8 @@ import { notFound } from 'next/navigation';
 import WorkoutButtons from './WorkoutButtons';
 import { Workout } from '../../../context/WorkoutContext';
 
-export const dynamic = 'force-dynamic';
-
 async function getWorkout(id: string): Promise<Workout | null> {
-  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`, { cache: 'no-store' });
+  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
   if (!res.ok) return null;
   return res.json();
 }
