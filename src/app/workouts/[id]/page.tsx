@@ -4,8 +4,10 @@ import { notFound } from 'next/navigation';
 import WorkoutButtons from './WorkoutButtons';
 import { Workout } from '../../../context/WorkoutContext';
 
+export const dynamic = 'force-dynamic';
+
 async function getWorkout(id: string): Promise<Workout | null> {
-  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`);
+  const res = await fetch(`https://api.abcz.workers.dev/api/fitlog/${id}`, { cache: 'no-store' });
   if (!res.ok) return null;
   return res.json();
 }
@@ -21,13 +23,13 @@ export default async function WorkoutDetailsPage({ params }: { params: Promise<{
   return (
     <main className="flex-1 w-full px-6 sm:px-10 py-8 sm:py-16 max-w-[1400px] mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-        
+
         {/* Left Side: Visual/Media */}
         <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-[4/5] overflow-hidden rounded-3xl border border-white/5">
-          <Image 
-            src={workout.image} 
-            alt={workout.name} 
-            fill 
+          <Image
+            src={workout.image}
+            alt={workout.name}
+            fill
             className="object-cover"
             priority
           />
@@ -35,7 +37,7 @@ export default async function WorkoutDetailsPage({ params }: { params: Promise<{
 
         {/* Right Side: Sections */}
         <div className="flex flex-col lg:pt-4">
-          <h1 
+          <h1
             className="text-4xl sm:text-5xl lg:text-5xl font-bold uppercase text-white mb-4"
             style={{ fontFamily: "var(--font-oswald)" }}
           >
@@ -48,7 +50,7 @@ export default async function WorkoutDetailsPage({ params }: { params: Promise<{
           {/* Category Tags */}
           <div className="flex flex-wrap gap-2 mb-8">
             {workout.muscleGroups.map((group) => (
-              <span 
+              <span
                 key={group}
                 className="bg-[#ccff00] text-black text-[11px] font-bold uppercase px-3 py-1 rounded-full tracking-wide"
               >

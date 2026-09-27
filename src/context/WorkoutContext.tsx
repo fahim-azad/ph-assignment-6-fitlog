@@ -24,6 +24,7 @@ type WorkoutContextType = {
   addSaved: (workout: Workout) => boolean;
   removePlanned: (id: number) => void;
   removeSaved: (id: number) => void;
+  isLoaded: boolean;
 };
 
 const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
@@ -75,14 +76,14 @@ export function WorkoutProvider({ children }: { children: React.ReactNode }) {
 
   if (!isClient) {
     return (
-      <WorkoutContext.Provider value={{ plannedWorkouts: [], savedWorkouts: [], addPlanned, addSaved, removePlanned, removeSaved }}>
+      <WorkoutContext.Provider value={{ plannedWorkouts: [], savedWorkouts: [], addPlanned, addSaved, removePlanned, removeSaved, isLoaded: false }}>
         {children}
       </WorkoutContext.Provider>
     );
   }
 
   return (
-    <WorkoutContext.Provider value={{ plannedWorkouts, savedWorkouts, addPlanned, addSaved, removePlanned, removeSaved }}>
+    <WorkoutContext.Provider value={{ plannedWorkouts, savedWorkouts, addPlanned, addSaved, removePlanned, removeSaved, isLoaded: true }}>
       {children}
     </WorkoutContext.Provider>
   );

@@ -6,16 +6,11 @@ import toast from 'react-hot-toast';
 import { useWorkouts } from '../../context/WorkoutContext';
 
 export default function MyPlanPage() {
-  const { plannedWorkouts, savedWorkouts, removePlanned, removeSaved } = useWorkouts();
+  const { plannedWorkouts, savedWorkouts, removePlanned, removeSaved, isLoaded } = useWorkouts();
   const [activeTab, setActiveTab] = useState<'plan' | 'saved'>('plan');
   const [sortBy, setSortBy] = useState<'duration' | 'calories' | 'rating'>('duration');
-  const [isClient, setIsClient] = useState(false);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) {
+  if (!isLoaded) {
     return (
       <main className="flex-1 w-full px-6 sm:px-10 py-32 flex items-center justify-center min-h-[70vh]">
         <p className="text-[#ccff00] font-bold text-2xl uppercase tracking-widest animate-pulse" style={{ fontFamily: "var(--font-oswald)" }}>
